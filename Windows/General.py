@@ -13,21 +13,21 @@ def unjsonize (json_data):
 	string = json.dumps(json_data, indent = 4)
 	return string
 	
-def load_json (path):
+def loadJson (path):
 	with open(path, "r") as file:
 		data = json.load(file)
 
 		return data
 
-def save_json (path, data):
+def jsonLoad (path):
+	self.loadJson(path)
+
+def saveJson (path, data):
 	with open(path, "w") as file:
 		json.dump(data, file, indent = 4)
 
-def json_save (path, data):
-	self.save_json(path, data)
-
-def json_load (path = ""):
-	self.load_json(path)
+def jsonSave (path, data):
+	self.saveJson(path, data)
 
 def putContentIn (filePath, data):
 	with open(filePath, "w") as file:
