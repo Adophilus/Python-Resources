@@ -1,3 +1,5 @@
+import win32gui
+import win32con
 import json
 import time
 import requests
@@ -19,15 +21,9 @@ def loadJson (path):
 
 		return data
 
-def jsonLoad (path):
-	self.loadJson(path)
-
 def saveJson (path, data):
 	with open(path, "w") as file:
 		json.dump(data, file, indent = 4)
-
-def jsonSave (path, data):
-	self.saveJson(path, data)
 
 def putContentIn (filePath, data):
 	with open(filePath, "w") as file:
@@ -77,7 +73,7 @@ def clearTimeout (timeoutObject):
 	pass
 
 def clearInterval (intervalObject):
-	self.clearTimeout(intervalObject)
+	clearTimeout(intervalObject)
 
 def httpPost (url, postData = {}):
 	req = requests.post(url, data = postData)
@@ -113,3 +109,11 @@ def searchString (string, regex, ignoreCase = False):
 
 def wait (secs):
 	time.sleep(secs)
+
+def hideWindow ():
+	program = win32gui.GetForegroundWindow()
+	win32gui.ShowWindow(program, win32con.SW_HIDE)
+
+def showWindow ():
+	program = win32gui.GetForegroundWindow()
+	win32gui.ShowWindow(program, win32con.SW_SHOW)

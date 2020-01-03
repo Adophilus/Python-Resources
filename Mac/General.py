@@ -13,21 +13,15 @@ def unjsonize (json_data):
 	string = json.dumps(json_data, indent = 4)
 	return string
 	
-def load_json (path):
+def loadJson (path):
 	with open(path, "r") as file:
 		data = json.load(file)
 
 		return data
 
-def save_json (path, data):
+def saveJson (path, data):
 	with open(path, "w") as file:
 		json.dump(data, file, indent = 4)
-
-def json_save (path, data):
-	self.save_json(path, data)
-
-def json_load (path = ""):
-	self.load_json(path)
 
 def putContentIn (filePath, data):
 	with open(filePath, "w") as file:
@@ -77,17 +71,18 @@ def clearTimeout (timeoutObject):
 	pass
 
 def clearInterval (intervalObject):
-	self.clearTimeout(intervalObject)
+	pass
 
 def httpPost (url, postData = {}):
-	req = requests.post(url, data = postData)
+	req = requests.post(url, json = postData)
 
 	return req.text
+	# return req
 
 def httpGet (url, getData = {}):
-	req = requests.get(url, data = postData)
+	req = requests.get(url, data = getData)
 
-	return req.text
+	return req
 
 def exp (num1, num2):
 	return num1 ** num2
