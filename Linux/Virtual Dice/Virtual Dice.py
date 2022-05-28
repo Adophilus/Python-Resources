@@ -21,8 +21,8 @@ class Dice(object):
 		self.clock.start()
 		starting = self.clock.get()
 		started = starting
-		while started <= (starting + time):
-			for i in range(1, 6):
+		while started <= started + time:
+			for _ in range(1, 6):
 				face = randint(fmin, fmax)
 			started += 1
 		self.clock.stop()
