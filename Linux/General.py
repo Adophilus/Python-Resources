@@ -5,19 +5,15 @@ import urllib
 from threading import Thread
 from re import search, sub, I, escape
 
-def jsonize (string):
-	jsonData = json.loads(string)
-	return jsonData
+def jsonize(string):
+	return json.loads(string)
 
-def unjsonize (json_data):
-	string = json.dumps(json_data, indent = 4)
-	return string
+def unjsonize(json_data):
+	return json.dumps(json_data, indent = 4)
 	
-def loadJson (path):
+def loadJson(path):
 	with open(path, "r") as file:
-		data = json.load(file)
-
-		return data
+		return json.load(file)
 
 def saveJson (path, data):
 	with open(path, "w") as file:
@@ -55,12 +51,12 @@ def setTimeout (method, secs = 5, args = {}):
 	return timeoutObj
 
 def setInterval (method, secs = 10, args = {}):
-	def _method (method, arguments, secs):
+	def _method(method, arguments, secs):
 		while True:
 			time.sleep(secs)
 			operation = method(**arguments)
 
-			if operation == "end" or operation == "break":
+			if operation in ["end", "break"]:
 				break
 
 	intervalObj = Thread(target = _method, args = (method, args, secs))
@@ -79,32 +75,21 @@ def httpPost (url, postData = {}):
 	return req.text
 	# return req
 
-def httpGet (url, getData = {}):
-	req = requests.get(url, data = getData)
-
-	return req
+def httpGet(url, getData = {}):
+	return requests.get(url, data = getData)
 
 def exp (num1, num2):
 	return num1 ** num2
 
-def swapQuotes (txt):
-	matchObj = search(r"'", txt, I)
-	if matchObj:
-		ntxt = sub(r"'", '"', txt)
-		return ntxt
-	else:
-		return txt
+def swapQuotes(txt):
+	return sub(r"'", '"', txt) if (matchObj := search(r"'", txt, I)) else txt
 
 def downloadFile (url, filename):
 	return urllib.urlretrieve(url, filename)
 
-def searchString (string, regex, ignoreCase = False):
-	if ignoreCase:
-		match = search(r"%s" % regex, string, I)
-	else:
-		match = search(r"%s" % regex, string)
-		
-	return match
+def searchString(string, regex, ignoreCase = False):
+	return (search(f"{regex}", string, I) if ignoreCase else search(
+	    f"{regex}", string))
 
 def wait (secs):
 	time.sleep(secs)
